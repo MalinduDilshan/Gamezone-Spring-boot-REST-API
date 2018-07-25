@@ -1,5 +1,6 @@
 package com.gamezone.restcontrollers;
 
+import com.gamezone.common.CommonUtils;
 import com.gamezone.entity.Computer;
 import com.gamezone.service.ComputerService;
 import io.swagger.annotations.ApiOperation;
@@ -26,14 +27,14 @@ public class ComputerControllers {
 
     @ApiOperation(value = "View a list of available computers", response = Computer.class)
     @CrossOrigin
-    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = CommonUtils.APPLICATION_TYPE)
     public Iterable<Computer> list(){
         return computerService.findAll();
     }
 
     @ApiOperation(value = "Save a computer", response = Computer.class)
     @CrossOrigin
-    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = CommonUtils.APPLICATION_TYPE)
     public void save(Computer computer){
         computerService.save(computer);
     }

@@ -3,19 +3,27 @@ package com.gamezone.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "COMPUTER")
+@Table(name = "computer")
 public class Computer {
 
   @Id
-  @Column(name = "PRIMARY_KEY", nullable = false, unique = true)
+  @Column(name = "primary_key", nullable = false, unique = true)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long primary_key;
 
-  @Column(name = "COMPUTER_NAME")
+  @Column(name = "computer_name")
   private String computer_name;
 
-  @Column(name = "IP_ADDRESS")
+  @Column(name = "ip_address")
   private String ip_addresss;
+
+  public Computer() {
+  }
+
+  public Computer(String computer_name, String ip_addresss) {
+    this.computer_name = computer_name;
+    this.ip_addresss = ip_addresss;
+  }
 
   public Long getPrimary_key() {
     return primary_key;

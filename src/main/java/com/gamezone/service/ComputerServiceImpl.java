@@ -10,6 +10,21 @@ import java.util.List;
 @Service
 public class ComputerServiceImpl implements ComputerService{
 
+    private static ComputerServiceImpl INSTANCE = null;
+
+    public static ComputerServiceImpl getINSTANCE() {
+        if(INSTANCE == null){
+            INSTANCE = new ComputerServiceImpl();
+        }
+        return INSTANCE;
+    }
+
+    private ComputerServiceImpl(){}
+
+    public static void setINSTANCE(ComputerServiceImpl INSTANCE) {
+        ComputerServiceImpl.INSTANCE = INSTANCE;
+    }
+
     @Autowired
     private ComputerController computerController;
 

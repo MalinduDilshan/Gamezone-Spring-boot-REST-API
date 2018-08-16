@@ -1,6 +1,7 @@
 package com.gamezone.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "computer")
@@ -12,17 +13,19 @@ public class Computer {
   private Long primary_key;
 
   @Column(name = "computer_name")
+  @NotNull(message = "Computer Name property can't be empty")
   private String computer_name;
 
   @Column(name = "ip_address")
-  private String ip_addresss;
+  @NotNull(message = "Ip Address property can't be empty")
+  private String ip_address;
 
   public Computer() {
   }
 
-  public Computer(String computer_name, String ip_addresss) {
+  public Computer(String computer_name, String ip_address) {
     this.computer_name = computer_name;
-    this.ip_addresss = ip_addresss;
+    this.ip_address = ip_address;
   }
 
   public Long getPrimary_key() {
@@ -41,11 +44,11 @@ public class Computer {
     this.computer_name = computer_name;
   }
 
-  public String getIp_addresss() {
-    return ip_addresss;
+  public String getIp_address() {
+    return ip_address;
   }
 
-  public void setIp_addresss(String ip_addresss) {
-    this.ip_addresss = ip_addresss;
+  public void setIp_address(String ip_address) {
+    this.ip_address = ip_address;
   }
 }

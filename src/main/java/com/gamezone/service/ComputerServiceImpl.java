@@ -34,7 +34,7 @@ public class ComputerServiceImpl implements ComputerService{
     }
 
     @Override
-    public void save(Computer computer) {
-        computerController.save(computer);
+    public Computer save(Computer computer) {
+        return computerController.save(computer);
     }
 }

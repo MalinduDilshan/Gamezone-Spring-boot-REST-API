@@ -25,7 +25,7 @@ public class ComputerControllerImpl implements ComputerController{
     }
 
     @Override
-    public void save(Computer computer) {
-        computerRepository.save(computer);
+    public Computer save(Computer computer) {
+        return computerRepository.save(computer);
     }
 }

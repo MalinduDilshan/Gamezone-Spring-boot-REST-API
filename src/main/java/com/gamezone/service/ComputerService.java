@@ -8,5 +8,5 @@ import java.util.List;
 @Component
 public interface ComputerService {
     List<Computer> findAll();
-    void save(Computer computer);
+    Computer save(Computer computer);
 }

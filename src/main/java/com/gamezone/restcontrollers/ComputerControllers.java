@@ -7,10 +7,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping("/Computer")
@@ -27,15 +26,15 @@ public class ComputerControllers {
 
     @ApiOperation(value = "View a list of available computers", response = Computer.class)
     @CrossOrigin
-    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = CommonUtils.APPLICATION_TYPE)
+    @GetMapping(produces = CommonUtils.APPLICATION_TYPE)
     public Iterable<Computer> list(){
         return computerService.findAll();
     }
 
     @ApiOperation(value = "Save a computer", response = Computer.class)
     @CrossOrigin
-    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = CommonUtils.APPLICATION_TYPE)
-    public void save(Computer computer){
-        computerService.save(computer);
+    @PostMapping(produces = CommonUtils.APPLICATION_TYPE)
+    public ResponseEntity save(@RequestBody Computer computer){
+        return new ResponseEntity(computerService.save(computer), HttpStatus.ACCEPTED);
     }
 }

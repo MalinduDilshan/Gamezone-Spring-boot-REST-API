@@ -7,6 +7,8 @@ import java.util.List;
 
 @Component
 public interface ComputerService {
-    List<Computer> findAll();
+    Iterable<Computer> findAll();
     Computer save(Computer computer);
+    void update(Computer computer);
+    void delete(long id);
 }

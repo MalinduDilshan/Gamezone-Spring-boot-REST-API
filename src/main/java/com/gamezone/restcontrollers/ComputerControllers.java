@@ -37,4 +37,20 @@ public class ComputerControllers {
     public ResponseEntity save(@RequestBody Computer computer){
         return new ResponseEntity(computerService.save(computer), HttpStatus.ACCEPTED);
     }
+
+    @ApiOperation(value = "Update a computer", response = Computer.class)
+    @CrossOrigin
+    @PutMapping(produces = CommonUtils.APPLICATION_TYPE)
+    public ResponseEntity update(@RequestBody Computer computer){
+        computerService.update(computer);
+        return new ResponseEntity(computer, HttpStatus.ACCEPTED);
+    }
+
+    @ApiOperation(value = "Delete a computer", response = Computer.class)
+    @CrossOrigin
+    @DeleteMapping(produces = CommonUtils.APPLICATION_TYPE)
+    public ResponseEntity delete(@RequestBody Computer computer){
+        computerService.delete(computer.getPrimary_key());
+        return new ResponseEntity(computer, HttpStatus.ACCEPTED);
+    }
 }

@@ -15,17 +15,22 @@ public class ComputerControllerImpl implements ComputerController{
     private ComputerRepository computerRepository;
 
     @Override
-    public List<Computer> findAll() {
-        List<Computer> computerList = new ArrayList<>();
-        Iterable<Computer> computerIterable = computerRepository.findAll();
-        for (Computer computer: computerIterable) {
-            computerList.add(computer);
-        }
-        return computerList;
+    public Iterable<Computer> findAll() {
+        return computerRepository.findAll();
     }
 
     @Override
     public Computer save(Computer computer) {
         return computerRepository.save(computer);
+    }
+
+    @Override
+    public void update(Computer computer) {
+        computerRepository.save(computer);
+    }
+
+    @Override
+    public void delete(long id) {
+        computerRepository.deleteById(id);
     }
 }

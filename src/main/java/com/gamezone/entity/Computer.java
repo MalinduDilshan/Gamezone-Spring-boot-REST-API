@@ -10,7 +10,7 @@ public class Computer {
   @Id
   @Column(name = "primary_key", nullable = false, unique = true)
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long primary_key;
+  private long primary_key;
 
   @Column(name = "computer_name")
   @NotNull(message = "Computer Name property can't be empty")
@@ -23,16 +23,16 @@ public class Computer {
   public Computer() {
   }
 
-  public Computer(String computer_name, String ip_address) {
+  public Computer(@NotNull(message = "Computer Name property can't be empty") String computer_name, @NotNull(message = "Ip Address property can't be empty") String ip_address) {
     this.computer_name = computer_name;
     this.ip_address = ip_address;
   }
 
-  public Long getPrimary_key() {
+  public long getPrimary_key() {
     return primary_key;
   }
 
-  public void setPrimary_key(Long primary_key) {
+  public void setPrimary_key(long primary_key) {
     this.primary_key = primary_key;
   }
 

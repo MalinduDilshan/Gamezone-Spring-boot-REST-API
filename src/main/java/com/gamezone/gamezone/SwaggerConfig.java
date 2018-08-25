@@ -29,7 +29,7 @@ public class SwaggerConfig {
 
         ApiInfo apiInfo = new ApiInfo("Gamezone Spring Boot App", "Spring Boot REST API", "1.0",
                 "Terms of service",
-                new Contact("My Lab pvt Ltd", "http://www.mylab.com/about-us.html", "info@mylab.com"),
+                new Contact("FEDO-LAB", "http://fedolab.co.nf/", "fedolabsoft@gmail.com"),
                 " License Version 1.0", "https://www.apache.org/licenses/LICENSE-2.0");
         return apiInfo;
     }

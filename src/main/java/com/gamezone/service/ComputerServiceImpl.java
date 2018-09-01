@@ -1,19 +1,31 @@
 package com.gamezone.service;
 
 import com.gamezone.controller.ComputerController;
+import com.gamezone.controller.TerminalController;
 import com.gamezone.entity.Computer;
+import com.gamezone.entity.Terminal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class ComputerServiceImpl implements ComputerService{
+public class ComputerServiceImpl implements ComputerService {
+
+    @Autowired
+    private ComputerController computerController;
+
+    @Autowired
+    private TerminalController terminalController;
 
     private static ComputerService INSTANCE = null;
 
     public static ComputerService getINSTANCE() {
-        if(INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new ComputerServiceImpl();
         }
         return INSTANCE;
@@ -23,10 +35,8 @@ public class ComputerServiceImpl implements ComputerService{
         ComputerServiceImpl.INSTANCE = INSTANCE;
     }
 
-    private ComputerServiceImpl(){}
-
-    @Autowired
-    private ComputerController computerController;
+    private ComputerServiceImpl() {
+    }
 
     @Override
     public Iterable<Computer> findAll() {
@@ -35,7 +45,22 @@ public class ComputerServiceImpl implements ComputerService{
 
     @Override
     public Computer save(Computer computer) {
-        return computerController.save(computer);
+
+        Computer returnComputer = computerController.save(computer);
+
+        Terminal terminal = new Terminal();
+
+        terminal.setAssignTime(new Date());
+        terminal.setDuration(0);
+        terminal.setProgressValue(0);
+        terminal.setLeftTime(new Date());
+        terminal.setStatus(false);
+        terminal.setPowerCut(false);
+        terminal.setComputerId(returnComputer.getPrimaryKey());
+
+        terminalController.save(terminal);
+
+        return returnComputer;
     }
 
     @Override
@@ -45,6 +70,7 @@ public class ComputerServiceImpl implements ComputerService{
 
     @Override
     public void delete(long id) {
+        terminalController.deleteByComputerId(id);
         computerController.delete(id);
     }
 }

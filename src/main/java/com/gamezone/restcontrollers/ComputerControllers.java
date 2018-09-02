@@ -38,6 +38,13 @@ public class ComputerControllers {
         return new ResponseEntity(computerService.save(computer), HttpStatus.ACCEPTED);
     }
 
+    @ApiOperation(value = "Find computer by id", response = Computer.class)
+    @CrossOrigin
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable long id){
+        return new ResponseEntity(computerService.findById(id), HttpStatus.ACCEPTED);
+    }
+
     @ApiOperation(value = "Update a computer", response = Computer.class)
     @CrossOrigin
     @PutMapping(produces = CommonUtils.APPLICATION_TYPE)

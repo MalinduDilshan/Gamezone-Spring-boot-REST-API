@@ -8,24 +8,28 @@ import javax.validation.constraints.NotNull;
 public class Computer {
 
   @Id
-  @Column(name = "primary_key", nullable = false, unique = true)
+  @Column(name = "primaryKey", nullable = false, unique = true)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long primaryKey;
 
-  @Column(name = "computer_name")
+  @Column(name = "computerName")
   @NotNull(message = "Computer Name property can't be empty")
   private String computerName;
 
-  @Column(name = "ip_address")
+  @Column(name = "ipAddress")
   @NotNull(message = "Ip Address property can't be empty")
   private String ipAddress;
+
+  @OneToOne(cascade = CascadeType.ALL, mappedBy = "computer")
+  private Terminal terminal;
 
   public Computer() {
   }
 
-  public Computer(@NotNull(message = "Computer Name property can't be empty") String computerName, @NotNull(message = "Ip Address property can't be empty") String ipAddress) {
+  public Computer(@NotNull(message = "Computer Name property can't be empty") String computerName, @NotNull(message = "Ip Address property can't be empty") String ipAddress, Terminal terminal) {
     this.computerName = computerName;
     this.ipAddress = ipAddress;
+    this.terminal = terminal;
   }
 
   public long getPrimaryKey() {
@@ -50,5 +54,13 @@ public class Computer {
 
   public void setIpAddress(String ipAddress) {
     this.ipAddress = ipAddress;
+  }
+
+  public Terminal getTerminal() {
+    return terminal;
+  }
+
+  public void setTerminal(Terminal terminal) {
+    this.terminal = terminal;
   }
 }

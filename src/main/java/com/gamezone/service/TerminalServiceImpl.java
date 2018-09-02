@@ -47,9 +47,4 @@ public class TerminalServiceImpl implements TerminalService {
     public void delete(long id) {
         terminalController.delete(id);
     }
-
-    @Override
-    public void deleteByComputerId(long id) {
-        terminalController.deleteByComputerId(id);
-    }
 }

@@ -9,5 +9,4 @@ public interface TerminalService {
     Terminal save(Terminal terminal);
     void update(Terminal terminal);
     void delete(long id);
-    void deleteByComputerId(long id);
 }

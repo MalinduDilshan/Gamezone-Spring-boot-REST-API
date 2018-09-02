@@ -21,23 +21,6 @@ public class TerminalTest {
     @Test
     public void contextLoads() {
 
-        Terminal terminal = new Terminal();
-
-        List<Terminal> terminalList = new ArrayList<>();
-        for (Terminal terminalObj : terminalService.findAll()) {
-            terminalList.add(terminalObj);
-        }
-        System.out.println("List of terminals size :" + terminalList.size());
-
-
-//        terminal = terminalList.get(0);
-//        terminal.setProgressValue(100);
-//
-//        terminalService.update(terminal);
-//        System.out.println("Terminal Updated");
-//
-//        terminalService.deleteByComputerId(terminal.getComputerId());
-//        System.out.println("Terminal Deleted");
     }
 
 }

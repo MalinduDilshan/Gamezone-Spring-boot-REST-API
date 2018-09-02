@@ -9,6 +9,7 @@ import java.util.List;
 public interface ComputerService {
     Iterable<Computer> findAll();
     Computer save(Computer computer);
+    Computer findById(long id);
     void update(Computer computer);
     void delete(long id);
 }

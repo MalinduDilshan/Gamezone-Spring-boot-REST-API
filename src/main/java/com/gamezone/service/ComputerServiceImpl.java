@@ -1,5 +1,6 @@
 package com.gamezone.service;
 
+import com.gamezone.common.TerminalStatusUtils;
 import com.gamezone.controller.ComputerController;
 import com.gamezone.controller.TerminalController;
 import com.gamezone.entity.Computer;
@@ -18,9 +19,6 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Autowired
     private ComputerController computerController;
-
-    @Autowired
-    private TerminalController terminalController;
 
     private static ComputerService INSTANCE = null;
 
@@ -45,22 +43,12 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public Computer save(Computer computer) {
+        return computerController.save(computer);
+    }
 
-        Computer returnComputer = computerController.save(computer);
-
-        Terminal terminal = new Terminal();
-
-        terminal.setAssignTime(new Date());
-        terminal.setDuration(0);
-        terminal.setProgressValue(0);
-        terminal.setLeftTime(new Date());
-        terminal.setStatus(false);
-        terminal.setPowerCut(false);
-        terminal.setComputerId(returnComputer.getPrimaryKey());
-
-        terminalController.save(terminal);
-
-        return returnComputer;
+    @Override
+    public Computer findById(long id) {
+        return computerController.findById(id);
     }
 
     @Override
@@ -70,7 +58,6 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public void delete(long id) {
-        terminalController.deleteByComputerId(id);
         computerController.delete(id);
     }
 }

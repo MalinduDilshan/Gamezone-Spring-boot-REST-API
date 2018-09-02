@@ -1,8 +1,9 @@
 package com.gamezone.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.Duration;
 import java.util.Date;
 
 @Entity
@@ -10,11 +11,11 @@ import java.util.Date;
 public class Terminal {
 
     @Id
-    @Column(name = "primary_key", nullable = false, unique = true)
+    @Column(name = "primaryKey", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long primaryKey;
 
-    @Column(name = "assign_time")
+    @Column(name = "assignTime")
     @NotNull(message = "Assign time property can't be empty")
     private Date assignTime;
 
@@ -22,37 +23,41 @@ public class Terminal {
     @NotNull(message = "Duration property can't be empty")
     private double duration;
 
-    @Column(name = "progress_value")
+    @Column(name = "progressValue")
     @NotNull(message = "Progress value property can't be empty")
     private int progressValue;
 
-    @Column(name = "left_time")
+    @Column(name = "leftTime")
     @NotNull(message = "Left time value property can't be empty")
     private  Date leftTime;
 
     @Column(name = "status")
     @NotNull(message = "Status value property can't be empty")
-    private  boolean status;
+    private  String status;
 
-    @Column(name = "power_cut")
+    @Column(name = "powerCut")
     @NotNull(message = "Power cut value property can't be empty")
     private  boolean powerCut;
 
-    @Column(name = "computer_id")
-    @NotNull(message = "Computer id value property can't be empty")
-    private  long computerId;
+    @Column(name = "computer_primaryKey", insertable = false, updatable = false)
+    private long computer_primaryKey;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "computer_primaryKey")
+    private Computer computer;
 
     public Terminal() {
     }
 
-    public Terminal(@NotNull(message = "Assign time property can't be empty") Date assignTime, @NotNull(message = "Duration property can't be empty") double duration, @NotNull(message = "Progress value property can't be empty") int progressValue, @NotNull(message = "Left time value property can't be empty") Date leftTime, @NotNull(message = "Status value property can't be empty") boolean status, @NotNull(message = "Power cut value property can't be empty") boolean powerCut, @NotNull(message = "Computer id value property can't be empty") long computerId) {
+    public Terminal(@NotNull(message = "Assign time property can't be empty") Date assignTime, @NotNull(message = "Duration property can't be empty") double duration, @NotNull(message = "Progress value property can't be empty") int progressValue, @NotNull(message = "Left time value property can't be empty") Date leftTime, @NotNull(message = "Status value property can't be empty") String status, @NotNull(message = "Power cut value property can't be empty") boolean powerCut, Computer computer) {
         this.assignTime = assignTime;
         this.duration = duration;
         this.progressValue = progressValue;
         this.leftTime = leftTime;
         this.status = status;
         this.powerCut = powerCut;
-        this.computerId = computerId;
+        this.computer = computer;
     }
 
     public long getPrimaryKey() {
@@ -95,11 +100,11 @@ public class Terminal {
         this.leftTime = leftTime;
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -111,11 +116,11 @@ public class Terminal {
         this.powerCut = powerCut;
     }
 
-    public long getComputerId() {
-        return computerId;
+    public Computer getComputer() {
+        return computer;
     }
 
-    public void setComputerId(long computerId) {
-        this.computerId = computerId;
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 }

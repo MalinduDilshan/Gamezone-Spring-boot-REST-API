@@ -30,9 +30,4 @@ public class TerminalControllerImpl implements TerminalController{
     public void delete(long id) {
         terminalRepository.deleteById(id);
     }
-
-    @Override
-    public void deleteByComputerId(long id) {
-        terminalRepository.deleteByComputerId(id);
-    }
 }

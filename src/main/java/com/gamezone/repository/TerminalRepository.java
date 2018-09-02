@@ -9,6 +9,4 @@ import javax.transaction.Transactional;
 @Repository
 public interface TerminalRepository extends CrudRepository<Terminal, Long> {
 
-    @Transactional
-    void deleteByComputerId(long id);
 }

@@ -36,7 +36,7 @@ public class TerminalControllers {
     @CrossOrigin
     @PostMapping(produces = CommonUtils.APPLICATION_TYPE)
     public ResponseEntity save(@RequestBody Terminal terminal){
-        return new ResponseEntity(terminalService.save(terminal), HttpStatus.ACCEPTED);
+        return new ResponseEntity(terminalService.save(terminal), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update a terminal", response = Terminal.class)
@@ -44,7 +44,7 @@ public class TerminalControllers {
     @PutMapping(produces = CommonUtils.APPLICATION_TYPE)
     public ResponseEntity update(@RequestBody Terminal terminal){
         terminalService.update(terminal);
-        return new ResponseEntity(terminal, HttpStatus.ACCEPTED);
+        return new ResponseEntity(terminal, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Delete a terminal by Computer Id", response = Terminal.class)

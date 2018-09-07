@@ -1,8 +1,8 @@
 package com.gamezone.restcontrollers;
 
 import com.gamezone.common.CommonUtils;
-import com.gamezone.entity.Computer;
-import com.gamezone.service.ComputerService;
+import com.gamezone.entity.User;
+import com.gamezone.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -12,11 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Computer")
-public class ComputerControllers {
+@RequestMapping("/User")
+public class UserControllers {
 
     @Autowired
-    private ComputerService computerService;
+    private UserService userService;
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -24,39 +24,40 @@ public class ComputerControllers {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
 
-    @ApiOperation(value = "View a list of available computers", response = Computer.class)
+    @ApiOperation(value = "View a list of available users", response = User.class)
     @CrossOrigin
     @GetMapping(produces = CommonUtils.APPLICATION_TYPE)
-    public Iterable<Computer> list(){
-        return computerService.findAll();
+    public Iterable<User> list(){
+        return userService.findAll();
     }
 
-    @ApiOperation(value = "Save a computer", response = Computer.class)
+    @ApiOperation(value = "Save a user", response = User.class)
     @CrossOrigin
     @PostMapping(produces = CommonUtils.APPLICATION_TYPE)
-    public ResponseEntity save(@RequestBody Computer computer){
-        return new ResponseEntity(computerService.save(computer), HttpStatus.OK);
+    public ResponseEntity save(@RequestBody User user){
+        return new ResponseEntity(userService.save(user), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Find computer by id", response = Computer.class)
+    @ApiOperation(value = "Find user by id", response = User.class)
     @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable long id){
-        return new ResponseEntity(computerService.findById(id), HttpStatus.OK);
+        return new ResponseEntity(userService.findById(id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Update a computer", response = Computer.class)
+    @ApiOperation(value = "Update a user", response = User.class)
     @CrossOrigin
     @PutMapping(produces = CommonUtils.APPLICATION_TYPE)
-    public ResponseEntity update(@RequestBody Computer computer){
-        computerService.update(computer);
-        return new ResponseEntity(computer, HttpStatus.OK);
+    public ResponseEntity update(@RequestBody User user){
+        userService.update(user);
+        return new ResponseEntity(user, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete a computer", response = Computer.class)
+    @ApiOperation(value = "Delete a user", response = User.class)
     @CrossOrigin
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id){
-        computerService.delete(id);
+        userService.delete(id);
     }
+
 }

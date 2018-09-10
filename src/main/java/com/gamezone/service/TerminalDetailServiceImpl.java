@@ -46,4 +46,19 @@ public class TerminalDetailServiceImpl implements TerminalDetailService{
     public void delete(long id) {
         terminalDetailController.delete(id);
     }
+
+    @Override
+    public Iterable<TerminalDetail> findByComputerId(long id) {
+        return terminalDetailController.findByComputerId(id);
+    }
+
+    @Override
+    public Iterable<TerminalDetail> findByMemberId(long id) {
+        return terminalDetailController.findByMemberId(id);
+    }
+
+    @Override
+    public Iterable<TerminalDetail> findByUserId(long id) {
+        return terminalDetailController.findByUserId(id);
+    }
 }

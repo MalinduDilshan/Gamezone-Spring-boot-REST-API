@@ -30,4 +30,19 @@ public class TerminalDetailControllerImpl implements TerminalDetailController {
     public void delete(long id) {
         terminalDetailRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<TerminalDetail> findByComputerId(long id) {
+        return terminalDetailRepository.findByComputer_PrimaryKey(id);
+    }
+
+    @Override
+    public Iterable<TerminalDetail> findByMemberId(long id) {
+        return terminalDetailRepository.findByMember_PrimaryKey(id);
+    }
+
+    @Override
+    public Iterable<TerminalDetail> findByUserId(long id) {
+        return terminalDetailRepository.findByUser_PrimaryKey(id);
+    }
 }

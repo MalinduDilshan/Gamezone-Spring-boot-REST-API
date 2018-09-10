@@ -52,4 +52,21 @@ public class TerminalDetailControllers {
     public void delete(@PathVariable long id){
         terminalDetailService.delete(id);
     }
+
+    @ApiOperation(value = "View a list of available terminal details", response = TerminalDetail.class)
+    @CrossOrigin
+    @GetMapping("/{id}")
+    public Iterable<TerminalDetail> findByComputerId(@PathVariable("id") long id,
+                                                     @RequestParam("findByType") String findByType){
+        if(findByType.equals("USER")){
+            return terminalDetailService.findByUserId(id);
+        }
+        else if(findByType.equals("MEMBER")){
+            return terminalDetailService.findByMemberId(id);
+        }
+        else{
+            return terminalDetailService.findByComputerId(id);
+        }
+
+    }
 }

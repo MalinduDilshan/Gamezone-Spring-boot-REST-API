@@ -71,6 +71,7 @@ public class MemberControllers {
         Member response = null;
         if(profilePicture != null){
             response = new Member();
+            response.setPrimaryKey(memberId);
             response.setPhoto(profilePicture.getBytes());
             memberService.update(response);
             return new ResponseEntity(response, HttpStatus.OK);

@@ -46,7 +46,7 @@ public class TerminalDetailControllers {
         return new ResponseEntity(terminalDetail, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete a terminal detail by Computer Id", response = TerminalDetail.class)
+    @ApiOperation(value = "Delete a terminal detail by id", response = TerminalDetail.class)
     @CrossOrigin
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id){

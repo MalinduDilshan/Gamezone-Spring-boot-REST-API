@@ -1,9 +1,12 @@
 package com.gamezone.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author Malindu Dilshan
@@ -76,10 +79,17 @@ public class User {
      */
     private Date modifiedDate;
 
+    /**
+     * One to Many Relationship of User and TerminalDetail
+     */
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<TerminalDetail> terminalDetailList;
+
     public User() {
     }
 
-    public User(@NotNull(message = "First Name property can't be empty") String firstName, @NotNull(message = "Last Name property can't be empty") String lastName, @NotNull(message = "NIC property can't be empty") String nic, @NotNull(message = "Email property can't be empty") String email, @NotNull(message = "Mobile property can't be empty") long mobile, byte[] photo, String createdUser, Date createdDate, String modifiedUser, Date modifiedDate) {
+    public User(String firstName, String lastName, String nic, String email, long mobile, byte[] photo, String createdUser, Date createdDate, String modifiedUser, Date modifiedDate, List<TerminalDetail> terminalDetailList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nic = nic;
@@ -90,6 +100,7 @@ public class User {
         this.createdDate = createdDate;
         this.modifiedUser = modifiedUser;
         this.modifiedDate = modifiedDate;
+        this.terminalDetailList = terminalDetailList;
     }
 
     public long getPrimaryKey() {
@@ -178,5 +189,13 @@ public class User {
 
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public List<TerminalDetail> getTerminalDetailList() {
+        return terminalDetailList;
+    }
+
+    public void setTerminalDetailList(List<TerminalDetail> terminalDetailList) {
+        this.terminalDetailList = terminalDetailList;
     }
 }

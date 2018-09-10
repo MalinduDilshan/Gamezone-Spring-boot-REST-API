@@ -1,8 +1,11 @@
 package com.gamezone.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author Malindu Dilshan
@@ -58,10 +61,17 @@ public class Computer {
   @OneToOne(cascade = CascadeType.ALL, mappedBy = "computer")
   private Terminal terminal;
 
+  /**
+   * One to Many Relationship of Computer and TerminalDetail
+   */
+  @JsonIgnore
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "computer")
+  private List<TerminalDetail> terminalDetailList;
+
   public Computer() {
   }
 
-  public Computer(@NotNull(message = "Computer Name property can't be empty") String computerName, @NotNull(message = "Ip Address property can't be empty") String ipAddress, String createdUser, Date createdDate, String modifiedUser, Date modifiedDate, Terminal terminal) {
+  public Computer(@NotNull(message = "Computer Name property can't be empty") String computerName, @NotNull(message = "Ip Address property can't be empty") String ipAddress, String createdUser, Date createdDate, String modifiedUser, Date modifiedDate, Terminal terminal, List<TerminalDetail> terminalDetailList) {
     this.computerName = computerName;
     this.ipAddress = ipAddress;
     this.createdUser = createdUser;
@@ -69,6 +79,7 @@ public class Computer {
     this.modifiedUser = modifiedUser;
     this.modifiedDate = modifiedDate;
     this.terminal = terminal;
+    this.terminalDetailList = terminalDetailList;
   }
 
   public long getPrimaryKey() {
@@ -133,5 +144,13 @@ public class Computer {
 
   public void setTerminal(Terminal terminal) {
     this.terminal = terminal;
+  }
+
+  public List<TerminalDetail> getTerminalDetailList() {
+    return terminalDetailList;
+  }
+
+  public void setTerminalDetailList(List<TerminalDetail> terminalDetailList) {
+    this.terminalDetailList = terminalDetailList;
   }
 }
